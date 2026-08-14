@@ -52,7 +52,73 @@ local function runSuctionCode()
     end)
 end
 
-if placeId == 18550498098 then
+if placeId == 11828384869 then
+    local Window = Rayfield:CreateWindow({
+        Name = "Femboy Hub - Counter & Elude",
+        LoadingTitle = "Femboy Hub",
+        LoadingSubtitle = "by silentabsolutedayn",
+        ConfigurationSaving = { Enabled = false }
+    })
+
+    local Tab = Window:CreateTab("Badges", 4483345998)
+
+    Tab:CreateButton({
+        Name = "Counter + Elude",
+        Callback = function()
+            task.spawn(function()
+                local player = game.Players.LocalPlayer
+                local character = player.Character or player.CharacterAdded:Wait()
+                local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+                for i, v in next, workspace:GetDescendants() do
+                    if v:IsA("ClickDetector") then
+                        fireclickdetector(v)
+                    end
+                end
+                
+                humanoidRootPart:PivotTo(CFrame.new(0, 1500, 0))
+                task.wait(1)
+                humanoidRootPart.Anchored = true
+                
+                local timeLeft = 120
+                for i = 1, 120 do
+                    timeLeft = timeLeft - 1
+                    local msg = Instance.new("Message", workspace)
+                    msg.Text = "Seconds left to receive: " .. timeLeft
+                    task.wait(1)
+                    msg:Destroy()
+                end
+                
+                task.wait(2)
+                task.spawn(function()
+                    while task.wait() do
+                        if character and humanoidRootPart and workspace:FindFirstChild("Ruins") then
+                            humanoidRootPart:PivotTo(workspace.Ruins.Elude.Glove.CFrame)
+                        end
+                    end
+                end)
+                
+                task.wait(0.25)
+                for i, v in pairs(workspace:GetDescendants()) do
+                    if v:IsA("ClickDetector") then
+                        fireclickdetector(v)
+                    end
+                end
+            end)
+        end
+    })
+
+    Tab:CreateButton({
+        Name = "Get Alchemist Plushie",
+        Callback = function()
+            for i, v in next, workspace:GetDescendants() do
+                if v:IsA("ClickDetector") then
+                    fireclickdetector(v)
+                end
+            end
+        end
+    })
+elseif placeId == 18550498098 then
     local Window = Rayfield:CreateWindow({
         Name = "Femboy Hub - Place 18550498098",
         LoadingTitle = "Femboy Hub",
@@ -1254,7 +1320,6 @@ end
 
 local Tab1 = Window:CreateTab("Slap Battles Badges", 4483345998)
 
--- Добавленная кнопка телепортации на ивент Counter + Elude
 Tab1:CreateButton({
     Name = "Auto-Get Counter + Elude",
     Callback = function()
